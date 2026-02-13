@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { BsMoon, BsSun } from "react-icons/bs";
 import { Link, NavLink } from "react-router";
+import { HiMenu } from "react-icons/hi";
 import Logo from "../../../Componentes/Logo/Logo";
 import useAuth from "../../../hooks/useAuth";
 
@@ -13,7 +14,7 @@ const Navbar = () => {
     setTheme(saveTheme);
     document.documentElement.setAttribute("data-theme", saveTheme);
   }, []);
-  //them toggle button
+
   const themeToggle = () => {
     const newTheme = theme === "dark" ? "light" : "dark";
     setTheme(newTheme);
@@ -29,73 +30,77 @@ const Navbar = () => {
       .catch((error) => console.error(error));
   };
 
+  const navLinks = (
+    <>
+      <li><NavLink to="/">Home</NavLink></li>
+      <li><NavLink to="/all-loan">All-Loans</NavLink></li>
+
+      {!user && (
+        <>
+          <li><NavLink to="/about">About</NavLink></li>
+          <li><NavLink to="/contact">Contact</NavLink></li>
+          <li><NavLink to="/register">Register</NavLink></li>
+          <li><NavLink to="/login">Login</NavLink></li>
+        </>
+      )}
+
+      {user && (
+        <>
+          <li><NavLink to="/dashboard">Dashboard</NavLink></li>
+          <li>
+            <img
+              src={
+                user.photoURL ||
+                "https://i.ibb.co/MBtjqXQ/no-avatar.gif"
+              }
+              alt="user"
+              className="w-10 h-10 rounded-full"
+              title={user.displayName || "User"}
+            />
+          </li>
+          <li>
+            <button onClick={handleLogout} className="btn btn-sm">
+              Logout
+            </button>
+          </li>
+        </>
+      )}
+    </>
+  );
+
   return (
     <div className="navbar bg-base-100 shadow-md px-6">
-      {/* ===== Left (Logo) ===== */}
+
+      {/* ===== Left ===== */}
       <div className="navbar-start">
+
+        {/* Mobile Menu */}
+        <div className="dropdown lg:hidden">
+          <label tabIndex={0} className="btn btn-ghost">
+            <HiMenu size={24} />
+          </label>
+          <ul
+            tabIndex={0}
+            className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+          >
+            {navLinks}
+          </ul>
+        </div>
+
+        {/* Logo */}
         <Link to="/" className="btn btn-ghost text-xl">
           <Logo />
         </Link>
       </div>
 
-      {/* ===== Center (Menu) ===== */}
+      {/* ===== Desktop Menu ===== */}
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal gap-4 font-semibold text-lg">
-          {/* Common links */}
-          <li>
-            <NavLink to="/">Home</NavLink>
-          </li>
-          <li>
-            <NavLink to="/all-loan">All-Loans</NavLink>
-          </li>
-
-          {/* User NOT logged in */}
-          {!user && (
-            <>
-              <li>
-                <NavLink to="/about">About Us</NavLink>
-              </li>
-              <li>
-                <NavLink to="/contact">Contact</NavLink>
-              </li>
-              <li>
-                <NavLink to="/register">Register</NavLink>
-              </li>
-              <li>
-                <NavLink to="/login">Login</NavLink>
-              </li>
-            </>
-          )}
-
-          {/* User logged in */}
-          {user && (
-            <>
-              <li>
-                <NavLink to="/dashboard">Dashboard</NavLink>
-              </li>
-              <li>
-                <div className="flex justify-center items-center">
-                  <img
-                    src={
-                      user.photoURL || "https://i.ibb.co/MBtjqXQ/no-avatar.gif"
-                    }
-                    alt="user"
-                    className="w-10 h-10 rounded-full cursor-pointer"
-                    title={user.displayName || "User"}
-                  />
-                </div>
-              </li>
-              <li>
-                <button onClick={handleLogout} className="btn">
-                  Logout
-                </button>
-              </li>
-            </>
-          )}
+          {navLinks}
         </ul>
       </div>
 
-      {/* ===== Right (Theme Toggle) ===== */}
+      {/* ===== Right ===== */}
       <div className="navbar-end">
         <button onClick={themeToggle} className="btn btn-outline">
           {theme === "dark" ? <BsSun size={20} /> : <BsMoon size={20} />}

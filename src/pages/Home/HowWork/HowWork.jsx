@@ -1,5 +1,6 @@
 import React from "react";
 
+
 const HowWork = () => {
   return (
     <div>
@@ -13,7 +14,7 @@ const HowWork = () => {
               Simple, fast and secure loan process designed for you
             </p>
           </div>
-
+  
           <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="relative bg-white rounded-2xl p-8 shadow hover:shadow-xl transition hover:-translate-y-2">
               <div className="w-14 h-14 flex items-center justify-center rounded-full bg-blue-600 text-white text-xl font-bold">

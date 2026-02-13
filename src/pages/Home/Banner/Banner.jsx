@@ -1,6 +1,7 @@
 import React from "react";
 import bannerImage from "../../../assets/banner.png";
 import Container from "../../../Componentes/Container/Container";
+import { Link } from "react-router";
 
 const Banner = () => {
   return (
@@ -19,8 +20,9 @@ const Banner = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <button className="btn btn-primary">Apply for Loan</button>
-              <button className="btn btn-outline">Explore Loans</button>
+              
+              <Link to='apply-now' className="btn btn-primary">Apply for Loan</Link>
+              <Link to='explore-loans' className="btn btn-outline">Explore Loans</Link>
             </div>
           </div>
 

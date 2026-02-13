@@ -1,21 +1,18 @@
 import React from "react";
 import { Link } from "react-router";
 
-const LoanCard = ({ latestLoan }) => {
-  const {_id, title, description, maxLoan, image, interestRate} = latestLoan;
+const Loan = ({ loan }) => {
+  const { _id, title, description, maxLoan, image, interestRate } = loan;
   return (
     <div className="card bg-base-100 shadow-sm">
       <figure className="px-10 pt-10">
-        <img
-          src={image}
-          className="rounded-xl w-80 h-48"
-        />
+        <img src={image} className="rounded-xl w-80 h-48" />
       </figure>
       <div className="card-body items-center text-center">
         <h2 className="card-title">{title}</h2>
         <p>{description}</p>
         <p> Interest Rate : {interestRate}%</p>
-        <p> Max Loan: $ {maxLoan}</p>
+        <p> Max Loan: ${maxLoan}</p>
 
         <div className="card-actions py-2">
           <Link to={`/loan-details/${_id}`} className="btn btn-primary">View Details</Link>
@@ -25,4 +22,4 @@ const LoanCard = ({ latestLoan }) => {
   );
 };
 
-export default LoanCard;
+export default Loan;

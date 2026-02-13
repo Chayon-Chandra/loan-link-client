@@ -1,9 +1,19 @@
 import React from 'react';
+import Container from '../../Componentes/Container/Container';
+import LoansContanet from './LoansContanet/LoansContanet';
+
+const loansPromise = fetch('http://localhost:3000/loans')
+.then(res => res.json());
 
 const AllLoan = () => {
+
     return (
-        <div>
-            <h2>all page</h2>
+        <div className='bg-gray-200'>
+           <Container>
+            <div className='py-10 '>
+                <LoansContanet loansPromise={loansPromise}></LoansContanet>
+            </div>
+           </Container>
         </div>
     );
 };
