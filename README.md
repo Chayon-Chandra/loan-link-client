@@ -18,3 +18,10 @@ Danger: #EF4444 (Rejected)
 
 👉 খুব trustworthy vibe দেয়, investors & users দুজনেই পছন্দ করে।
 
+Admin:
+Email: admin@gmail.com
+Password: 123456
+
+Manager:
+Email: manager@gmail.com
+Password: 123456

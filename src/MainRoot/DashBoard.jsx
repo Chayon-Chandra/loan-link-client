@@ -1,7 +1,8 @@
 import React from "react";
 import { GrUserAdd } from "react-icons/gr";
 import { MdOutlineAdminPanelSettings, MdOutlineManageAccounts } from "react-icons/md";
-import { Link, NavLink } from "react-router";
+import { PiPiggyBank } from "react-icons/pi";
+import { Link, NavLink, Outlet } from "react-router";
 
 
 const DashBoard = () => {

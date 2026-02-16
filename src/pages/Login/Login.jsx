@@ -1,50 +1,49 @@
-import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router";
-import useAuth from "../../hooks/useAuth";
-import SocialLogin from "../Home/SocialLogin/SocialLogin";
-import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+
+
 import { useState } from "react";
+import SocialLogin from "../Home/SocialLogin/SocialLogin";
+import useAuth from "../../hooks/useAuth";
+import { Link, useNavigate } from "react-router";
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import { useForm } from "react-hook-form";
+
+
 
 const Login = () => {
   const [showLoginPassword, setShowLoginPassword] = useState(false);
   const { signInUser, setUser } = useAuth();
-  const { register, handleSubmit,  formState: { errors } } = useForm();
-  // const location = useLocation();
+  const { register, handleSubmit, formState:{errors} } =  useForm();
   const navigate = useNavigate();
-  const API_BASE = "https://loan-link-api.vercel.app";
 
-const handleLogin = (data) => {
-  signInUser(data.email, data.password)
-    .then((result) => {
-      const userEmail = result.user.email;
+  const handleLogin = async (data) => {
+    try {
+
+      const result = await signInUser(data.email, data.password);
       setUser(result.user);
-      localStorage.setItem("userEmail", userEmail);
+      const token = await result.user.getIdToken();
+      const res = await fetch(`http://localhost:3000/users/role/${data.email}`, {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      });
 
-      // Fetch role from backend
-      fetch(`${API_BASE}/users/role/${userEmail}`)
-        .then(res => res.json())
-        .then(data => {
-          const role = data.role;
-          localStorage.setItem("userRole", role);
+      const roleData = await res.json();
+      const role = roleData.role;
 
-          // Redirect based on role
-          if(role === "admin"){
-            navigate("/dashboard/admin");
-          } else if(role === "manager"){
-            navigate("/dashboard/manager");
-          } else {
-            navigate("/dashboard/my-loan");
-          }
-        })
-        .catch(err => console.error("Role fetch error:", err));
-    })
-    .catch((error) => {
-      console.log(error.message);
-    });
-};
+      localStorage.setItem("userRole", role);
 
+      if (role === "admin") {
+        navigate("/dashboard/admin");
+      } else if (role === "manager") {
+        navigate("/dashboard/manager");
+      } else {
+        navigate("/dashboard/my-loan"); 
+      }
+    } catch (error) {
+      console.log("Login Error:", error.message);
+    }
+  };
 
-  // show login password
   const handleShowLoginPassword = (event) => {
     event.preventDefault();
     setShowLoginPassword(!showLoginPassword);
@@ -62,24 +61,22 @@ const handleLogin = (data) => {
           <div>
             <label className="label">Email</label>
             <input
-              {...register("email")}
+              {...register("email", { required: "Email is required" })}
               type="email"
               className="input input-bordered w-full"
               placeholder="Email"
             />
-          </div>
-          {errors.email && (
-              <p className="text-red-500 text-sm py-2">
-                {errors.email.message}
-              </p>
+            {errors?.email && (
+              <p className="text-red-500 text-sm py-2">{errors.email.message}</p>
             )}
+          </div>
 
           {/* Password */}
           <div>
             <label className="label">Password</label>
             <div className="relative">
               <input
-                {...register("password")}
+                {...register("password", { required: "Password is required" })}
                 type={showLoginPassword ? "text" : "password"}
                 className="input input-bordered w-full"
                 placeholder="Password"
@@ -91,19 +88,22 @@ const handleLogin = (data) => {
                 {showLoginPassword ? <FaRegEyeSlash /> : <FaRegEye />}
               </button>
             </div>
-          </div>
-          {errors.password && (
-              <p className="text-red-500 text-sm py-2">
-                {errors.password.message}
-              </p>
+            {errors?.password && (
+              <p className="text-red-500 text-sm py-2">{errors.password.message}</p>
             )}
-          {/* Button */}
+          </div>
+
+          {/* Submit button */}
           <button className="btn btn-neutral w-full mt-2">Login</button>
         </fieldset>
       </form>
-      <SocialLogin></SocialLogin>
+
+      {/* Social login */}
+      <SocialLogin />
+
+      {/* Register link */}
       <p className="text-center py-3">
-        Don't have an account?
+        Don't have an account?{" "}
         <Link to="/register" className="text-blue-400 underline">
           Register Here
         </Link>

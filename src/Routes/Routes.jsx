@@ -93,4 +93,13 @@ export const router = createBrowserRouter([
       },
     ],
   },
+  {
+  path: "/admin-dashboard",
+  element: (
+    <PrivetRoutes>
+      <Admin />
+    </PrivetRoutes>
+  ),
+}
+
 ]);
