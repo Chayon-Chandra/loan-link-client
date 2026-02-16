@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router';
-import Loading from '../../../Componentes/Loading/Loading';
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router";
+import Loading from "../../../Componentes/Loading/Loading";
 
 const ExploreLoans = () => {
   const [loans, setLoans] = useState([]);
@@ -9,7 +9,7 @@ const ExploreLoans = () => {
   useEffect(() => {
     document.title = "Explore Loans | LoanLink";
 
-    fetch("http://localhost:3000/loans")
+    fetch("https://loan-link-api.vercel.app/loans")
       .then((res) => res.json())
       .then((data) => {
         setLoans(data);
@@ -22,12 +22,10 @@ const ExploreLoans = () => {
   }, []);
 
   if (loading) {
-    return (
-        <Loading></Loading>
-    );
+    return <Loading></Loading>;
   }
-    return (
-        <div className="max-w-7xl mx-auto px-4 py-10">
+  return (
+    <div className="max-w-7xl mx-auto px-4 py-10">
       <h2 className="text-3xl font-bold text-center mb-10">
         Explore Our Loan Offers
       </h2>
@@ -78,7 +76,7 @@ const ExploreLoans = () => {
         ))}
       </div>
     </div>
-    );
+  );
 };
 
 export default ExploreLoans;

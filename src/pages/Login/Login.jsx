@@ -8,16 +8,36 @@ import { useState } from "react";
 const Login = () => {
   const [showLoginPassword, setShowLoginPassword] = useState(false);
   const { signInUser, setUser } = useAuth();
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit,  formState: { errors } } = useForm();
   const location = useLocation();
   const navigate = useNavigate();
 
   const handleLogin = (data) => {
     signInUser(data.email, data.password)
-      .then((result) => {
+      .then(async (result) => {
         console.log(result.user);
         setUser(result.user);
         navigate(location.state || "/");
+
+        const token = await result.user.getIdToken();
+        const res = await fetch(`http://localhost:3000/users/role/${data.email}`, {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      });
+      const roleData = await res.json();
+      const role = roleData.role;
+      localStorage.setItem("userRole", role);
+
+      
+      if (role === "admin") {
+        navigate("/admin-dashboard");
+      } else if (role === "manager") {
+        navigate("/manager-dashboard");
+      } else {
+        navigate("/"); 
+      }
+
       })
       .catch((error) => {
         console.log(error.message);
@@ -48,6 +68,11 @@ const Login = () => {
               placeholder="Email"
             />
           </div>
+          {errors.email && (
+              <p className="text-red-500 text-sm py-2">
+                {errors.email.message}
+              </p>
+            )}
 
           {/* Password */}
           <div>
@@ -67,6 +92,11 @@ const Login = () => {
               </button>
             </div>
           </div>
+          {errors.password && (
+              <p className="text-red-500 text-sm py-2">
+                {errors.password.message}
+              </p>
+            )}
           {/* Button */}
           <button className="btn btn-neutral w-full mt-2">Login</button>
         </fieldset>
