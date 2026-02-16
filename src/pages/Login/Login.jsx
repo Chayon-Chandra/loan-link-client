@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { Link, useLocation, useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import useAuth from "../../hooks/useAuth";
 import SocialLogin from "../Home/SocialLogin/SocialLogin";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
@@ -9,40 +9,40 @@ const Login = () => {
   const [showLoginPassword, setShowLoginPassword] = useState(false);
   const { signInUser, setUser } = useAuth();
   const { register, handleSubmit,  formState: { errors } } = useForm();
-  const location = useLocation();
+  // const location = useLocation();
   const navigate = useNavigate();
+  const API_BASE = "https://loan-link-api.vercel.app";
 
-  const handleLogin = (data) => {
-    signInUser(data.email, data.password)
-      .then(async (result) => {
-        console.log(result.user);
-        setUser(result.user);
-        navigate(location.state || "/");
+const handleLogin = (data) => {
+  signInUser(data.email, data.password)
+    .then((result) => {
+      const userEmail = result.user.email;
+      setUser(result.user);
+      localStorage.setItem("userEmail", userEmail);
 
-        const token = await result.user.getIdToken();
-        const res = await fetch(`http://localhost:3000/users/role/${data.email}`, {
-        headers: {
-          authorization: `Bearer ${token}`,
-        },
-      });
-      const roleData = await res.json();
-      const role = roleData.role;
-      localStorage.setItem("userRole", role);
+      // Fetch role from backend
+      fetch(`${API_BASE}/users/role/${userEmail}`)
+        .then(res => res.json())
+        .then(data => {
+          const role = data.role;
+          localStorage.setItem("userRole", role);
 
-      
-      if (role === "admin") {
-        navigate("/admin-dashboard");
-      } else if (role === "manager") {
-        navigate("/manager-dashboard");
-      } else {
-        navigate("/"); 
-      }
+          // Redirect based on role
+          if(role === "admin"){
+            navigate("/dashboard/admin");
+          } else if(role === "manager"){
+            navigate("/dashboard/manager");
+          } else {
+            navigate("/dashboard/my-loan");
+          }
+        })
+        .catch(err => console.error("Role fetch error:", err));
+    })
+    .catch((error) => {
+      console.log(error.message);
+    });
+};
 
-      })
-      .catch((error) => {
-        console.log(error.message);
-      });
-  };
 
   // show login password
   const handleShowLoginPassword = (event) => {
