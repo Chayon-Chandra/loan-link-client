@@ -21,7 +21,7 @@ const Login = () => {
       const result = await signInUser(data.email, data.password);
       setUser(result.user);
       const token = await result.user.getIdToken();
-      const res = await fetch(`http://localhost:3000/users/role/${data.email}`, {
+      const res = await fetch(`https://loan-link-api.vercel.app/users/role/${data.email}`, {
         headers: {
           authorization: `Bearer ${token}`,
         },

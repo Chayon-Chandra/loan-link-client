@@ -6,10 +6,9 @@ import { Link, NavLink, Outlet } from "react-router";
 
 
 const DashBoard = () => {
-  // get role from localStorage
+ 
   const role = localStorage.getItem("userRole");
 
-  // logout function
   const handleLogout = () => {
     localStorage.removeItem("userRole");
     localStorage.removeItem("userEmail");
@@ -20,14 +19,14 @@ const DashBoard = () => {
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content">
-        {/* Navbar */}
+  
         <nav className="navbar w-full bg-base-300">
           <label
             htmlFor="my-drawer-4"
             aria-label="open sidebar"
             className="btn btn-square btn-ghost"
           >
-            {/* Sidebar toggle icon */}
+           
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -46,16 +45,15 @@ const DashBoard = () => {
           <div className="px-4 text-2xl text-primary font-semibold">Microloan</div>
         </nav>
 
-        {/* Outlet for nested routes */}
         <Outlet />
       </div>
 
-      {/* Sidebar */}
+  
       <div className="drawer-side">
         <label htmlFor="my-drawer-4" className="drawer-overlay"></label>
         <div className="flex min-h-full flex-col items-start bg-base-200 w-64">
           <ul className="menu w-full grow">
-            {/* Homepage */}
+          
             <li>
               <Link to="/" className="text-lg">
                 <svg
@@ -75,7 +73,7 @@ const DashBoard = () => {
               </Link>
             </li>
 
-            {/* My Loan */}
+   
             <li>
               <NavLink to="/dashboard/my-loan" className="text-lg">
                 <PiPiggyBank />
@@ -83,7 +81,7 @@ const DashBoard = () => {
               </NavLink>
             </li>
 
-            {/* Manager Menu (only for manager) */}
+        
             {role === "manager" && (
               <li>
                 <NavLink to="/dashboard/manager" className="text-lg">
@@ -93,7 +91,7 @@ const DashBoard = () => {
               </li>
             )}
 
-            {/* Admin Menu (only for admin) */}
+       
             {role === "admin" && (
               <li>
                 <NavLink to="/dashboard/admin" className="text-lg">
