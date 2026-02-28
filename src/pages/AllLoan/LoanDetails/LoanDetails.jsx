@@ -37,7 +37,7 @@ const LoanDetails = () => {
               {interestRate}%
             </p>
             <p>
-              <span className="font-semibold">Max Loan:</span> ৳
+              <span className="font-semibold">Max Loan:</span> $
               {maxLoan.toLocaleString()}
             </p>
           </div>
@@ -50,7 +50,9 @@ const LoanDetails = () => {
             {emiPlans?.map((plan, index) => (
               <div
                 key={index}
-                className="border rounded-xl p-4 text-center hover:shadow transition"
+                className="border rounded-xl p-4 text-center
+                hover:border-red-500 hover:bg-red-50 hover:shadow-xl hover:scale-105
+                transition transform"
               >
                 <p className="text-sm text-gray-500">Duration</p>
                 <h4 className="text-lg font-bold">{plan.months} Months</h4>
@@ -65,7 +67,7 @@ const LoanDetails = () => {
         </div>
         <div className="text-center pb-10">
           <Link to="/apply-now"
-            className="font-semibold text-2xl text-primary border-2 border-primary py-2 px-4 rounded-full transition-all duration-300 hover:text-white hover:bg-black hover:border-red-500"
+            className="font-semibold border-2 border-primary py-2 px-4 rounded-full btn btn-primary btn-sm hover:scale-105 transition ease-in-out"
           >
             Apply Now
           </Link>

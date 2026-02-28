@@ -1,4 +1,3 @@
-import React from "react";
 import Container from "../../Componentes/Container/Container";
 import LoansContanet from "./LoansContanet/LoansContanet";
 

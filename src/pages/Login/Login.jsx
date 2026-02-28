@@ -50,7 +50,7 @@ const Login = () => {
   };
 
   return (
-    <div className="bg-amber-200 p-6 rounded-lg w-full md:w-3/5 lg:w-2/5 mx-auto my-10">
+    <div className="bg-slate-100 p-6 rounded-lg w-full md:w-3/5 lg:w-2/5 mx-auto my-10">
       <h2 className="text-2xl font-bold mb-6 text-center lg:text-left">
         Sign in your Account
       </h2>

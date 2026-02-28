@@ -3,12 +3,12 @@ import React from "react";
 const Contact = () => {
   return (
     <div>
-      <div className="bg-slate-50 min-h-screen">
+      <div className="bg-slate-100 min-h-screen">
         {/* Header */}
-        <section className="bg-gradient-to-r from-indigo-600 to-blue-600 text-white py-20">
+        <section className="py-20">
           <div className="max-w-6xl mx-auto px-4 text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">Contact Us</h1>
-            <p className="text-indigo-100 max-w-xl mx-auto">
+            <p className="text-lg text-slate-800 max-w-2xl mx-auto">
               Have questions or need help? We're here to support you anytime.
             </p>
           </div>
@@ -17,17 +17,17 @@ const Contact = () => {
         {/* Contact Info */}
         <section className="py-16">
           <div className="max-w-6xl mx-auto px-4 grid sm:grid-cols-2 md:grid-cols-3 gap-8">
-            <div className="bg-white p-6 rounded-xl shadow text-center">
+            <div className="bg-white p-6 rounded-xl shadow text-center border hover:border-red-500 hover:bg-red-50 hover:shadow-xl hover:scale-105 transition transform">
               <h3 className="text-xl font-semibold mb-2">Email</h3>
               <p className="text-slate-600">support@loanplatform.com</p>
             </div>
 
-            <div className="bg-white p-6 rounded-xl shadow text-center">
+            <div className="bg-white p-6 rounded-xl shadow text-center border hover:border-red-500 hover:bg-red-50 hover:shadow-xl hover:scale-105 transition transform">
               <h3 className="text-xl font-semibold mb-2">Phone</h3>
               <p className="text-slate-600">+880 1234-567890</p>
             </div>
 
-            <div className="bg-white p-6 rounded-xl shadow text-center">
+            <div className="bg-white p-6 rounded-xl shadow text-center border hover:border-red-500 hover:bg-red-50 hover:shadow-xl hover:scale-105 transition transform">
               <h3 className="text-xl font-semibold mb-2">Office</h3>
               <p className="text-slate-600">Dhaka, Bangladesh</p>
             </div>

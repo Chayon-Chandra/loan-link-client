@@ -4,7 +4,7 @@ import { Link } from "react-router";
 const Loan = ({ loan }) => {
   const { _id, title, description, maxLoan, image, interestRate } = loan;
   return (
-    <div className="card bg-base-100 shadow-sm">
+    <div className="card bg-base-100 shadow-sm hover:scale-105 transition ease-in-out">
       <figure className="px-10 pt-10">
         <img src={image} className="rounded-xl w-80 h-48" />
       </figure>

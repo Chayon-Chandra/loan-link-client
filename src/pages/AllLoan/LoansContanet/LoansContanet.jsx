@@ -6,7 +6,7 @@ const LoansContanet = ({loansPromise}) => {
   
     return (
         <div className='bg-gray-200'>
-            <div className="pb-7 font-bold text-5xl text-center text-primary">
+            <div className="pb-7 font-bold text-4xl text-center">
                 <h2>Our All Loans</h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-3 px-2">

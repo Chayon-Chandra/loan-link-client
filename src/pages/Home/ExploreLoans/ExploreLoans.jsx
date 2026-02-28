@@ -32,7 +32,7 @@ const ExploreLoans = () => {
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {loans.map((loan) => (
-          <div key={loan._id} className="card bg-base-100 shadow-xl">
+          <div key={loan._id} className="card bg-base-100 shadow-xl hover:scale-105 transition ease-in-out">
             <figure>
               <img
                 src={loan.image}

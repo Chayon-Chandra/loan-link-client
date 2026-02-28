@@ -69,7 +69,7 @@ const Navbar = () => {
   );
 
   return (
-    <div className="navbar bg-base-100 shadow-md px-6">
+    <div className="navbar sticky top-0 z-50 bg-base-100 shadow-md px-6">
 
       {/* ===== Left ===== */}
       <div className="navbar-start">
@@ -94,7 +94,7 @@ const Navbar = () => {
       </div>
 
       {/* ===== Desktop Menu ===== */}
-      <div className="navbar-center hidden lg:flex">
+      <div className="navbar-center hidden lg:flex ">
         <ul className="menu menu-horizontal gap-4 font-semibold text-lg">
           {navLinks}
         </ul>

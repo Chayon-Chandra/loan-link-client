@@ -7,7 +7,7 @@ import FAQ from "../FAQ/FAQ";
 import LatestLoan from "../LatestLoan/LatestLoan";
 
 const latestLoanPromiss = fetch(
-  "https://loan-link-api.vercel.app/loans",
+  "https://loan-link-api.vercel.app/latest-loans",
 ).then((res) => res.json());
 
 const Home = () => {

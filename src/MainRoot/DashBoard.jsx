@@ -42,7 +42,7 @@ const DashBoard = () => {
               <path d="M14 10l2 2l-2 2"></path>
             </svg>
           </label>
-          <div className="px-4 text-2xl text-primary font-semibold">Microloan</div>
+          <div className="px-4 text-2xl font-semibold">Microloan</div>
         </nav>
 
         <Outlet />
